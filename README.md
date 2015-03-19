@@ -65,5 +65,28 @@ var map = new MoonMap('#center', {
 });
 ```
 
+### Carousel ###
+The **MoonMap** can also be turned into a simple carousel. This will allow a new moon to be activated at an interval you set.
+
+```js
+
+var map = new MoonMap('#center', {
+  active: function(orbit){
+            
+    var active = orbit.currentlyActive,
+        activeMoon = orbit.moons[active];
+                
+    // Do something with the active moon
+    console.log('New moon is active');
+            
+  },
+  activeClass: 'active',
+  moonSelector: '.moonSelector',
+  radius: 140
+});
+    
+map.startCarousel(1200); // change moons every 1200 ms
+```
+
 ## Notes ##
 For additional documentation and examples, please [see our website.](http://moonmapjs.com/)
