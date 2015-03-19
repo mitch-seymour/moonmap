@@ -4,6 +4,8 @@
 
 **MoonMap** is a JavaScript library for positioning DOM elements (called moons) evenly around a central point. It also acts as a carousel, and can be used for creating radial menus.
 
+---
+
 ## Basic usage ##
 
 Include the MoonMap stylesheet and javascript file in your HTML page. Now, create a div to put the moon map in:
