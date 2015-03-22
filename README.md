@@ -1,10 +1,9 @@
 # Moon Map
 
-<a href="http://d3js.org"><img src="http://moonmapjs.com/www/img/logo.png" align="left" hspace="10" vspace="6"></a>
+<a href="http://moonmapjs.com"><img src="http://moonmapjs.com/www/img/logo.png" align="right" hspace="10" vspace="6" height="160"></a>
 
 **MoonMap** is a JavaScript library for positioning DOM elements (called moons) evenly around a central point. It also acts as a carousel, and can be used for creating radial menus.
 
----
 
 ## Basic usage ##
 
@@ -42,7 +41,52 @@ var map = new MoonMap('#center', {
   radius: 140
 });
 ```
+### Moon Selectors ###
+Instead of specifying the number of moons with the **n** parameter, you can instead provide a **moonSelector**. This allows us to create moons from existing DOM elements. For example, using the following markup, we can create 7 moons, each with different content.
 
+```html
+<div id="center" class="orbit-center">
+  <span>Center</span>
+</div>
+<span class="moonSelector">1</span>
+<span class="moonSelector">2</span>
+<span class="moonSelector">3</span>
+<span class="moonSelector">4</span>
+<span class="moonSelector">5</span>
+<span class="moonSelector">6</span>
+<span class="moonSelector">7</span>
+```
+Now, we can create the *MoonMap* using the following javascript.
+
+```js
+var map = new MoonMap('#center', {
+  moonSelector: '.moonSelector',
+  radius: 140
+});
+```
+
+### Carousel ###
+The **MoonMap** can also be turned into a simple carousel. This will allow a new moon to be activated at an interval you set.
+
+```js
+
+var map = new MoonMap('#center', {
+  active: function(orbit){
+            
+    var active = orbit.currentlyActive,
+        activeMoon = orbit.moons[active];
+                
+    // Do something with the active moon
+    console.log('New moon is active');
+            
+  },
+  activeClass: 'active',
+  moonSelector: '.moonSelector',
+  radius: 140
+});
+    
+map.startCarousel(1200); // change moons every 1200 ms
+```
 
 ## Notes ##
 For additional documentation and examples, please [see our website.](http://moonmapjs.com/)
