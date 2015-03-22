@@ -46,7 +46,8 @@
 		moonClass: 'moon',
 		n: 12,
 		radius:false,
-		removeOriginal: true
+		removeOriginal: true,
+		startAngle: 90
 	};
 	
 	// Define the method for merging options
@@ -88,14 +89,15 @@
 		// moons are defined in the DOM
 		var moons = document.querySelectorAll(this.options['moonSelector']),
 			n = moons.length,
-			div = 360 / n;
+			div = 360 / n,
+			angle = 360 - this.options.startAngle;
 	
 		for (var i = 0; i < n; ++i){
 		
         	var moon = document.createElement('div'),
         		node = moons[i].cloneNode(true),
-        		y = Math.sin((div * i) * (Math.PI / 180)) * this.options.radius,
-        		x = Math.cos((div * i) * (Math.PI / 180)) * this.options.radius;
+        		y = Math.sin((angle) * (Math.PI / 180)) * this.options.radius,
+        		x = Math.cos((angle) * (Math.PI / 180)) * this.options.radius;
         	
         	moon.className = this.options.moonClass;
         	moon.style.position = 'absolute';
@@ -117,6 +119,8 @@
         		moons[i].parentNode.removeChild(moons[i]);
         		
         	this.moons.push(moon);
+        	
+        	angle += div;
     	}
 	
 	
@@ -124,13 +128,15 @@
 		
 		// moons are NOT defined in the DOM, and are added programmatically
 		var n = this.options.n,
-			div = 360 / n;
+			div = 360 / n,
+			angle = 360 - this.options.startAngle;
+			
 			
 		for (var i = 1; i <= this.options.n; ++i){
-		
+		    
         	var moon = document.createElement('div'),
-        		y = Math.sin((div * i) * (Math.PI / 180)) * this.options.radius,
-        		x = Math.cos((div * i) * (Math.PI / 180)) * this.options.radius;
+        		y = Math.sin((angle) * (Math.PI / 180)) * this.options.radius,
+        		x = Math.cos((angle) * (Math.PI / 180)) * this.options.radius;
         	
         	moon.className = this.options.moonClass;
         	moon.style.position = 'absolute';
@@ -139,7 +145,7 @@
         	// check to see if a content setter function was passed in the options
         	if (typeof this.options.content == 'function'){
        			
-       			moon.innerHTML = this.makeAbsolute(this.options.content(i-1, moon));
+       			moon.innerHTML = this.makeAbsolute(this.options.content(i, moon));
        			
        		} else if (this.options.content){
        		
@@ -157,6 +163,9 @@
 
         	
         	this.moons.push(moon);
+        	
+        	angle += div;
+        	
     	}
     	
     }
