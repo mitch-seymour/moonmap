@@ -65,6 +65,9 @@ var map = new MoonMap('#center', {
 });
 ```
 
+### Parameters ###
+A full list of parameters for **MoonMap** can be found [here](http://moonmapjs.com/docs)
+
 ### Carousel ###
 The **MoonMap** can also be turned into a simple carousel. This will allow a new moon to be activated at an interval you set.
 
